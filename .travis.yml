@@ -14,4 +14,12 @@ after_success:
   - docker built -t roni3233/multi-nginx ./nginx
   - docker build -t roni3233/multi-server ./server
   - docker build -t roni3233/multi-worker ./worker
+  
+  # Log into Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
+  #Push images into docker hub
+  - docker push roni3233/multi-client
+  - docker push roni3233/multi-nginx
+  - docker push roni3233/multi-server
+  - docker push roni3233/multi-worker
