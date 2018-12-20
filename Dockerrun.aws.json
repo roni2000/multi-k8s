@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "ContainerDefinitions": [
+        {
+            "name": "client",
+            "image": "rk3233/multi-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "rk3233/multi-server",
+            "hostname": "api",
+            "essential": false            
+        },
+        {
+            "name": "worker",
+            "image": "rk3233/multi-worker",
+            "hostname": "worker",
+            "essential": false             
+        },
+        {
+            "name": "nginx",
+            "image": "rk3233/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "ContainerPort": 80
+                }
+            ],
+            "links": ["client", "server"]              
+        }
+
+    ]
+}
